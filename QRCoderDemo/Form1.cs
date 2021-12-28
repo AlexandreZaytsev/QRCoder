@@ -10,6 +10,7 @@ using QRCoder;
 using System.Drawing.Imaging;
 using System.IO;
 
+
 namespace QRCoderDemo
 {
     public partial class Form1 : Form
@@ -22,6 +23,31 @@ namespace QRCoderDemo
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBoxECC.SelectedIndex = 0; //Pre-select ECC level "L"
+
+            PayloadGenerator.RussiaPaymentOrder.MandatoryFields mFld = new PayloadGenerator.RussiaPaymentOrder.MandatoryFields()
+            {
+                PersonalAcc = "40702810138250123017",
+                BIC = "",// "044525225",
+                BankName = "Œ¿Œ \"¡¿Õ \"",
+                Name = "ŒŒŒ ´“Ë ÍËÚ‡ª",
+                CorrespAcc = "30101810965770000413"
+            };
+
+            PayloadGenerator.RussiaPaymentOrder.OptionalFields oFld = new PayloadGenerator.RussiaPaymentOrder.OptionalFields()
+            {
+                Sum = "456"
+            };
+            PayloadGenerator.RussiaPaymentOrder.OptionalExtFields oExtFld = new PayloadGenerator.RussiaPaymentOrder.OptionalExtFields()
+            {
+                FirstName = "test"
+            };
+            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
+            string payload = generator.ToString();
+            textBoxQRCode.Text = payload;
+
+
+
+
             RenderQrCode();
         }
 
