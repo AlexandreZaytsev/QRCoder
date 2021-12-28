@@ -41,7 +41,9 @@ namespace QRCoderDemo
             {
                 FirstName = "test"
             };
-            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
+//            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
+            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, oFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
+
             string payload = generator.ToString();
             textBoxQRCode.Text = payload;
 

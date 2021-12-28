@@ -3050,62 +3050,48 @@ namespace QRCoder
 
             //base
             private CharacterSets characterSet;
-            //private readonly Iban iban;
-            private MandatoryFields mFields = new MandatoryFields();
-            private OptionalFields oFields = new OptionalFields();
-            private OptionalExtFields oExtFields = new OptionalExtFields();
+            private MandatoryFields mFields = new MandatoryFields();            //mandatory fields (for CharacterSets select)  
+            private OptionalFields oFields = new OptionalFields();              //optional fields (for CharacterSets select)
+            private OptionalExtFields oExtFields = new OptionalExtFields();     //optionalExt fields (for CharacterSets select)
 
             private string separator = "|";
-            /*
-                        private RussiaPaymentOrder()
-                        {
-                            mFields = new MandatoryFields();
-                            oFields = new OptionalFields();
-                        }
-            */
 
-            public RussiaPaymentOrder(
-                MandatoryFields mandatoryFields,// = null,
-                CharacterSets characterSet = CharacterSets.utf_8) //: this()
-            {
-                this.characterSet = characterSet;
-
+            /// <summary>
+            /// Generates a RussiaPaymentOrder payload (mandatory constructor)
+            /// </summary>
+            /// <param name="mandatoryFields">mandatory fields (for CharacterSets select)</param>
+            /// <param name="characterSet">Type of encoding (default UTF-8)</param>
+            public RussiaPaymentOrder(MandatoryFields mandatoryFields, CharacterSets characterSet = CharacterSets.utf_8){
                 if (mandatoryFields != null)
                     mFields = mandatoryFields;
+
+                this.characterSet = characterSet;
             }
 
             /// <summary>
-            /// Generates a RussiaPaymentOrder payload
-            /// </summary>            
-            /// <param name="name">Name of the payee (Наименование получателя платежа)</param>
-            /// <param name="personalAcc">Beneficiary account number (Номер счета получателя платежа)</param>
-            /// <param name="bankName">Name of the beneficiary's bank (Наименование банка получателя платежа)</param>
-            /// <param name="BIC">BIC (БИК)</param>
-            /// <param name="correspAcc">Box number / account payee's bank (Номер кор./сч. банка получателя платежа)</param>
+            /// Generates a RussiaPaymentOrder payload (extended constructor)
+            /// </summary>
+            /// <param name="mandatoryFields">>mandatory fields (for CharacterSets select)</param>
             /// <param name="optionalFields">An (optional) object of additional fields</param>
             /// <param name="characterSet">Type of encoding (default UTF-8)</param>
-            public RussiaPaymentOrder(
-                MandatoryFields mandatoryFields,// = null,
-                OptionalFields optionalFields = null,
-                CharacterSets characterSet = CharacterSets.utf_8) //: this()
-            {
-                this.characterSet = characterSet;
-
+            public RussiaPaymentOrder(MandatoryFields mandatoryFields, OptionalFields optionalFields = null, CharacterSets characterSet = CharacterSets.utf_8){
                 if (mandatoryFields != null)
                     mFields = mandatoryFields;
 
                 if (optionalFields != null)
                     oFields = optionalFields;
+
+                this.characterSet = characterSet;
             }
 
-            public RussiaPaymentOrder(
-                MandatoryFields mandatoryFields,// = null,
-                OptionalFields optionalFields = null,
-                OptionalExtFields optionalExtFields = null,
-                CharacterSets characterSet = CharacterSets.utf_8) //: this()
-            {
-                this.characterSet = characterSet;
-
+            /// <summary>
+            /// Generates a RussiaPaymentOrder payload (extended constructor)
+            /// </summary>
+            /// <param name="mandatoryFields"></param>
+            /// <param name="optionalFields">An (optional) object of additional fields</param>
+            /// <param name="optionalExtFields">An (Ext optional) object of additional fields</param>
+            /// <param name="characterSet">Type of encoding (default UTF-8)</param>
+            public RussiaPaymentOrder(MandatoryFields mandatoryFields, OptionalFields optionalFields = null, OptionalExtFields optionalExtFields = null, CharacterSets characterSet = CharacterSets.utf_8){
                 if (mandatoryFields != null)
                     mFields = mandatoryFields;
 
@@ -3114,8 +3100,9 @@ namespace QRCoder
 
                 if (optionalExtFields != null)
                     oExtFields = optionalExtFields;
-            }
 
+                this.characterSet = characterSet;
+            }
 
             /// <summary>
             /// Returns payload as string.
@@ -3128,7 +3115,7 @@ namespace QRCoder
                 var bytes = ToBytes();
 
 #if !NET35_OR_GREATER && !NETSTANDARD1_3_OR_GREATER
-        //        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 #endif
 #if NETSTANDARD1_3              
                 return Encoding.GetEncoding(cp).GetString(bytes,0,bytes.Length);
@@ -3170,7 +3157,7 @@ namespace QRCoder
 
                 //Encode return string as byte[] with correct CharacterSet
 #if !NET35_OR_GREATER
-                //           Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 #endif
                 var cp = this.characterSet.ToString().Replace("_", "-");
                 byte[] bytesOut = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding(cp), Encoding.UTF8.GetBytes(ret));
@@ -3285,6 +3272,7 @@ namespace QRCoder
 #endif
             }
 
+            #region //validates
 
             /// <summary>
             /// Validates a string against a given Regex pattern. Returns input if it matches the Regex expression (=valid) or throws Exception in case there's a mismatch
@@ -3319,6 +3307,13 @@ namespace QRCoder
                 return input;
             }
 
+            #endregion
+
+            #region //Sets of fields
+
+            /// <summary>
+            /// mandatory fields (for CharacterSets select)
+            /// </summary>
             public class MandatoryFields
             {
                 private string _name;
@@ -3377,6 +3372,10 @@ namespace QRCoder
                 }
 
             }
+
+            /// <summary>
+            /// //optional fields (for CharacterSets select)
+            /// </summary>
             public class OptionalFields
             {
                 //Подсистема взаимодействия системы банковских электронных срочных платежей(БЭСП Банка России) с системой SWIFT (Шлюз БЭСП-SWIFT)
@@ -3524,6 +3523,10 @@ namespace QRCoder
                 }
 
             }
+
+            /// <summary>
+            /// //optionalExt fields (for CharacterSets select)
+            /// </summary>
             public class OptionalExtFields
             {
                 // The following fiels are no further specified in the standard
@@ -3722,6 +3725,11 @@ namespace QRCoder
                 /// </summary>
                 public TechCode? TechCode { get; set; }
             }
+
+            #endregion
+
+            #region //Enums
+
             /// <summary>            
             /// (List of values of the technical code of the payment)
             /// <para>Перечень значений технического кода платежа</para>
@@ -3751,6 +3759,8 @@ namespace QRCoder
                 koi8_r = 3              // Encoding.GetEncoding("koi8-r")
 
             }
+
+            #endregion
             public class RussiaPaymentOrderException : Exception
             {
                 public RussiaPaymentOrderException(string message)
