@@ -27,7 +27,7 @@ namespace QRCoderDemo
             PayloadGenerator.RussiaPaymentOrder.MandatoryFields mFld = new PayloadGenerator.RussiaPaymentOrder.MandatoryFields()
             {
                 PersonalAcc = "40702810138250123017",
-                BIC = "",// "044525225",
+                BIC = "044525225",
                 BankName = "ÎÀÎ \"ÁÀÍÊ\"",
                 Name = "ÎÎÎ «Òğè êèòà»",
                 CorrespAcc = "30101810965770000413"
