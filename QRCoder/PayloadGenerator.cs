@@ -3035,7 +3035,7 @@ namespace QRCoder
         #endregion
 
         #region new version RussiaPaymentOrder
-        public class RussiaPaymentOrder : Payload //PayloadGenerator.Payload
+        public class RussiaPaymentOrder : Payload 
         {
             // Specification of RussianPaymentOrder
             //https://docs.cntd.ru/document/1200110981
@@ -3761,6 +3761,7 @@ namespace QRCoder
             }
 
             #endregion
+
             public class RussiaPaymentOrderException : Exception
             {
                 public RussiaPaymentOrderException(string message)
