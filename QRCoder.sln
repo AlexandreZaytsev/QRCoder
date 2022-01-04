@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31919.166
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCoder", "QRCoder\QRCoder.csproj", "{AA6BE23A-7813-4D2A-835E-B673631AE9F1}"
 EndProject
@@ -58,6 +58,7 @@ Global
 		{014F04C6-6099-4552-9A4F-D09C6E39D576}.Release|x86.ActiveCfg = Release|Any CPU
 		{014F04C6-6099-4552-9A4F-D09C6E39D576}.Release|x86.Build.0 = Release|Any CPU
 		{CA6DB0F5-DB6C-4DDD-8B5F-EF82FBB963E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA6DB0F5-DB6C-4DDD-8B5F-EF82FBB963E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA6DB0F5-DB6C-4DDD-8B5F-EF82FBB963E9}.Debug|ARM.ActiveCfg = Debug|x86
 		{CA6DB0F5-DB6C-4DDD-8B5F-EF82FBB963E9}.Debug|x64.ActiveCfg = Debug|x86
 		{CA6DB0F5-DB6C-4DDD-8B5F-EF82FBB963E9}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -104,7 +105,6 @@ Global
 		{1B51624B-9915-4ED6-8FC1-1B7C472246E5}.Release|x86.ActiveCfg = Release|Any CPU
 		{1B51624B-9915-4ED6-8FC1-1B7C472246E5}.Release|x86.Build.0 = Release|Any CPU
 		{A7A7E073-2504-4BA2-A63B-87AC34174789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7A7E073-2504-4BA2-A63B-87AC34174789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7A7E073-2504-4BA2-A63B-87AC34174789}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{A7A7E073-2504-4BA2-A63B-87AC34174789}.Debug|ARM.Build.0 = Debug|Any CPU
 		{A7A7E073-2504-4BA2-A63B-87AC34174789}.Debug|x64.ActiveCfg = Debug|Any CPU

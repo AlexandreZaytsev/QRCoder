@@ -42,7 +42,8 @@ namespace QRCoderDemo
                 FirstName = "test"
             };
 //            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
-            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, oFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
+//            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, oFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
+            var generator = new PayloadGenerator.RussiaPaymentOrder(mFld, oFld, oExtFld, PayloadGenerator.RussiaPaymentOrder.CharacterSets.utf_8);
 
             string payload = generator.ToString();
             textBoxQRCode.Text = payload;
@@ -64,6 +65,8 @@ namespace QRCoderDemo
             QRCodeGenerator.ECCLevel eccLevel = (QRCodeGenerator.ECCLevel)(level == "L" ? 0 : level == "M" ? 1 : level == "Q" ? 2 : 3);
             using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
             using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(textBoxQRCode.Text, eccLevel))
+
+                /*
             using (QRCode qrCode = new QRCode(qrCodeData))
             {
                 pictureBoxQRCode.BackgroundImage = qrCode.GetGraphic(20, GetPrimaryColor(), GetBackgroundColor(),
@@ -75,9 +78,33 @@ namespace QRCoderDemo
 
                 pictureBoxQRCode.SizeMode = PictureBoxSizeMode.StretchImage;
             }
-        }
+                */
+            using (ArtQRCode qrCode = new ArtQRCode(qrCodeData))
+            {
+               // pictureBoxQRCode.BackgroundImage = qrCode.GetGraphic(20);//, GetPrimaryColor(), GetBackgroundColor(),true);//',
+                                                                         //  GetIconBitmap(), (int)iconSize.Value);
+                pictureBoxQRCode.BackgroundImage = qrCode.GetGraphic(
+                    20,
+                    GetPrimaryColor(),
+                    GetBackgroundColor(), 
+                    Color.White, 
+                    null,
+                    .5, 
+                    true, 
+                    ArtQRCode.QuietZoneStyle..Dotted, 
+                    ArtQRCode.BackgroundImageStyle.DataAreaOnly,
+                    null);
 
-        private Bitmap GetIconBitmap()
+                this.pictureBoxQRCode.Size = new System.Drawing.Size(pictureBoxQRCode.Width, pictureBoxQRCode.Height);
+                //Set the SizeMode to center the image.
+                this.pictureBoxQRCode.SizeMode = PictureBoxSizeMode.CenterImage;
+
+                pictureBoxQRCode.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+
+            }
+
+            private Bitmap GetIconBitmap()
         {
             if (iconPath.Text.Length == 0)
             {
